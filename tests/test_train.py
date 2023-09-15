@@ -1,0 +1,18 @@
+import pytest
+from model.train import objective  
+from optuna.trial import FixedTrial
+
+# Fixture to create a fixed trial object
+@pytest.fixture
+def fixed_trial():
+    return FixedTrial(
+        {
+            "batch_size": 64,
+            "lr": 0.01,
+        }
+    )
+
+# Test to check if the objective function returns a valid accuracy
+def test_objective(fixed_trial):
+    accuracy = objective(fixed_trial)
+    assert 0 <= accuracy <= 1, "Accuracy must be between 0 and 1"
