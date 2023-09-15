@@ -17,6 +17,10 @@ def get_data_loaders(batch_size=64, train=True, val=True):
         [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))] # mean and std of MNIST dataset
     )
 
+    # NOTE: Currently, the dataset gets downloaded every time this script runs. 
+    # It would be more efficient to implement a check to see if the dataset 
+    # already exists locally before downloading it again (using python `hashlib`)
+
     # Loading the MNIST dataset
     train_dataset = (
         datasets.MNIST("./data", train=True, download=True, transform=transform)
