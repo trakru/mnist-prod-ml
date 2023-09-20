@@ -9,6 +9,10 @@ repos:
     rev: 23.9.1
     hooks:
     -   id: black
+- repo: https://github.com/facebook/usort
+  rev: v1.0.7
+  hooks:
+    - id: usort
 # - repo: https://github.com/pylint-dev/pylint
 #   rev:  v2.17.5
 #   hooks:
