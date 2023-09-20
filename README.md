@@ -15,23 +15,18 @@ The neural network consists of the following layers:
 | conv3_2      | Convolutional  | Sequential layer          | 7x7x512       |
 | fc1          | Fully Connected| -                         | 1000          |
 | fc2          | Fully Connected| -                         | 500           |
-| output_layer | Output         | -                         | 10         
+| output_layer | Output         | -                         | 10
 
 ## Training results
 
-```
-[I 2023-09-15 13:04:12,225] A new study created in memory with name: no-name-bfc99bd8-2b90-4913-a979-64fcfe736f77
-[I 2023-09-15 13:33:39,951] Trial 0 finished with value: 0.1135 and parameters: {'batch_size': 58, 'lr': 0.007533987858883899}. Best 
-is trial 0 with value: 0.1135.
-[I 2023-09-15 13:52:49,840] Trial 1 finished with value: 0.1032 and parameters: {'batch_size': 126, 'lr': 0.06902812409998378}. Best 
-is trial 0 with value: 0.1135.
-[I 2023-09-15 14:25:05,687] Trial 2 finished with value: 0.1028 and parameters: {'batch_size': 54, 'lr': 0.027973357381960676}. Best 
-is trial 0 with value: 0.1135.
-[I 2023-09-15 14:45:47,737] Trial 3 finished with value: 0.1135 and parameters: {'batch_size': 111, 'lr': 0.022178308944666807}. Best is trial 0 with value: 0.1135.
-[I 2023-09-15 15:05:36,712] Trial 4 finished with value: 0.1028 and parameters: {'batch_size': 126, 'lr': 0.06211682342661622}. Best 
-is trial 0 with value: 0.1135.
-Number of finished trials: 5
-Best trial:
-  Value: 0.1135
-  Params: {'batch_size': 58, 'lr': 0.007533987858883899}
-  ```
+Available on the local Optuna dashboard
+
+run `optuna-dashboard sqlite:///db.sqlite3` to view training results
+
+### Note on CUDA with Package Managers (Pip/Conda)
+
+For local installs only
+
+Cuda tends to not play nice with `pip` based installs. The recommended resolution is to create conda environments by running `conda create --name env` and running `conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia`. ALternatively, if we still would want to use pip, use the following to get torch installed `pip install --upgrade --force-reinstall torch==2.0.1+cu117 --index-url https://download.pytorch.org/whl/cu117`
+
+Cloud-based workflows are not impacted. just use one of the pre-configured images with torch & cuda-enabled
