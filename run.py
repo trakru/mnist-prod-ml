@@ -7,6 +7,7 @@ from model.train import objective, get_data_loaders, MNISTClassifier
 from model.train_utils import train_model
 import torch
 from torch import nn, optim
+import json
 
 
 def retrain_best_model(study):
@@ -38,17 +39,8 @@ def retrain_best_model(study):
     criterion = nn.CrossEntropyLoss()
 
     # Train the model
-    num_epochs = 10
+    num_epochs = 50
     train_model(model, train_loader, optimizer, criterion, device, num_epochs)
-    # for epoch in range(num_epochs):
-    #     model.train()
-    #     for _, (data, target) in enumerate(train_loader):
-    #         data, target = data.to(device), target.to(device)
-    #         optimizer.zero_grad()
-    #         output = model(data)
-    #         loss = criterion(output, target)
-    #         loss.backward()
-    #         optimizer.step()
 
     # define model name using datetime and path to save the model
     model_name = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -58,11 +50,22 @@ def retrain_best_model(study):
     torch.save(model.state_dict(), model_path)
     print(f"Model saved at {model_path}")
 
+    # json file for the model that contains information about the model
+    # and the hyperparameters used
+    model_info = {
+        "model_name": model_name,
+        "model_path": model_path,
+        "hyperparameters": best_params,
+    }
+    model_info_path = f"saved_models/{model_name}.json"
+    torch.save(model_info, model_info_path)
+    print(f"Model info saved at {model_info_path}")
+
 
 if __name__ == "__main__":
     study = optuna.create_study(
         storage="sqlite:///db.sqlite3",
-        study_name="mnist-example",
+        study_name=f"{datetime.now()}-mnist-example",
         direction="maximize",
         load_if_exists=True,
     )

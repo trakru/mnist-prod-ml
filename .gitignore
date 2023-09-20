@@ -3,8 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# ignore the model file
+# ignore the model file & hyperparameter file
+saved_models/*.json
 *.pth
+
+# ignore local files
+images/test_images/*
 
 # C extensions
 *.so

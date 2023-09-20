@@ -34,7 +34,7 @@ def objective(trial):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Hyperparameters to be optimized
-    batch_size = trial.suggest_int("batch_size", 32, 128)
+    batch_size = trial.suggest_int("batch_size", 32, 256)
 
     # Load data using the imported function
     train_loader, val_loader = get_data_loaders(batch_size=batch_size)
@@ -44,7 +44,7 @@ def objective(trial):
 
     # Generate the optimizers.
     optimizer_name = trial.suggest_categorical("optimizer", ["Adam", "RMSprop", "SGD"])
-    learn_rate = trial.suggest_float("lr", 1e-5, 1e-1, log=True)
+    learn_rate = trial.suggest_float("lr", 1e-5, 1e-3, log=True)
     optimizer = getattr(optim, optimizer_name)(model.parameters(), lr=learn_rate)
 
     # Training loop
@@ -71,7 +71,7 @@ def objective(trial):
             correct += pred.eq(target.view_as(pred)).sum().item()
 
     accuracy = correct / total
-    print(trial.report(accuracy, epoch))
+    # print(trial.report(accuracy, epoch))
 
     # Handle pruning based on the intermediate value.
     if trial.should_prune():
