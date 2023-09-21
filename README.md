@@ -90,3 +90,6 @@ For local installs only
 `CUDA` tends to not play nice with `pip` based installs. The recommended resolution is to create conda environments by running `conda env create -f environment.yml`. Alternatively, if we still would want to use pip, use the following to get torch installed `pip install --upgrade --force-reinstall torch==2.0.1+cu117 --index-url https://download.pytorch.org/whl/cu117` (Note: the version of `CUDA` depends on your graphics card)
 
 Cloud-based workflows are not impacted. Just use one of the pre-configured images with PyTorch & CUDA enabled
+
+## References
+None yet.
