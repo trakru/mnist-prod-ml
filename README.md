@@ -2,6 +2,41 @@
 
 This project offers a solution for classifying MNIST handwritten digits using a Convolutional Neural Network (CNN) and PyTorch according to the specifications in the [TASK document](TASK.md)
 
+## Setup
+
+Clone the project repository using the following command:
+
+```
+git clone https://github.com/trakru/mnist-prod-ml
+
+```
+
+Create a virtual environment and install the required packages using Conda
+
+```
+conda env create -f environment.yml
+```
+
+Activate the environment
+
+```
+conda activate conda-cuda
+```
+
+## Usage  
+### Local Training
+
+Utilize the `run.py` script to initiate the training process locally. This script optimizes the model using the `Optuna` framework and saves the best model to the `saved_models` directory.
+
+### Cloud Execution
+The same project structure is expected when setting up an AWS Sagemaker project (or any cloud platform that supports PyTorch and CUDA). Hwever, no scripts for cloud execution have been provided in this repo. The following considerations need to be taken into account when setting up the cloud project:
+
+- cloud bucket storage (e.g. S3, GCS, etc.)
+- identifying compute resources and expressing them as code (e.g. ml.m4.xlarge)
+- The estimator used to run the training job (e.g. `PyTorch` estimator in `AWS Sagemaker SDK`)
+- the hyperparameter tuning framework being used right now is `optuna`. However, this can be replaced with in-built estimators in `AWS Sagemaker SDK` or other frameworks like `ray` or `hyperopt`
+- the inference is being deployed via `FAST API` using `uvicorn`, but in reality this can be replaced with any other framework including having a potential serverless architechture with `AWS Lambda`
+
 ## Network Architecture
 
 The neural network consists of the following layers:
@@ -43,6 +78,10 @@ The model file is saved in the `saved_models` directory. Due to size limitations
 
 In addition to the model file, the `saved_models` directory also contains a `model_info.json` file that contains the model hyperparameters.
 
+## Deployment
+
+The project currently employs `FAST API` coupled with Uvicorn for inference deployment which admittedly is a toy deployment.
+ 
 ### Note on CUDA with Package Managers (Pip/Conda)
 ##### a.k.a. Why do we have both requirements.txt & environment.yml in the source repo
 
