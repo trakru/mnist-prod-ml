@@ -1,11 +1,12 @@
-import torch
-from torchvision import transforms
-from PIL import Image
-from model.network import MNISTClassifier
-import click
-import matplotlib.pyplot as plt
 import os
 from pathlib import Path
+
+import click
+import matplotlib.pyplot as plt
+import torch
+from model.network import MNISTClassifier
+from PIL import Image
+from torchvision import transforms
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = MNISTClassifier().to(device)
@@ -67,13 +68,16 @@ def infer(image_path):
     return predicted_class
 
 
-@click.command()
-@click.argument("image_path")
-def cli(image_path):
-    """Perform inference on a single image and print the predicted class."""
-    predicted_class = infer(image_path)
-    print(predicted_class)
+# DEBUG ONLY: run inference on a single image from the command line
+# Usage: python inference.py <path_to_image>
+# uncomment the following lines to enable
+# @click.command()
+# @click.argument("image_path")
+# def cli(image_path):
+#     """Perform inference on a single image and print the predicted class."""
+#     predicted_class = infer(image_path)
+#     print(predicted_class)
 
 
-if __name__ == "__main__":
-    cli()
+# if __name__ == "__main__":
+#     cli()

@@ -4,8 +4,9 @@ loading and batching the data during training and validation of a CNN model.
 """
 
 import os
-from torchvision import datasets, transforms
+
 from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
 
 
 def get_data_loaders(batch_size=64, train=True, val=True):

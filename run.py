@@ -1,13 +1,14 @@
 """
 this file is used to run the optuna study
 """
-from datetime import datetime
-import optuna
-from model.train import objective, get_data_loaders, MNISTClassifier
-from model.train_utils import train_model
-import torch
-from torch import nn, optim
 import json
+from datetime import datetime
+
+import optuna
+import torch
+from model.train import get_data_loaders, MNISTClassifier, objective
+from model.train_utils import train_model
+from torch import nn, optim
 
 
 def retrain_best_model(study):

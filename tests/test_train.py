@@ -1,7 +1,7 @@
 import pytest
+import torch
 from model.train import objective
 from optuna.trial import FixedTrial
-import torch
 
 
 # Fixture to create a fixed trial object
