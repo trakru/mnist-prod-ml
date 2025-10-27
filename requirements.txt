@@ -1,11 +1,17 @@
-# torchvision
-onnx
-optuna
-optuna-dashboard
-optuna-fast-fanova
-gunicorn
-pytest
-pylint
+# This file is deprecated. Use one of the following instead:
+#
+# For development (includes all tools and dependencies):
+#   pip install -r requirements-dev.txt
+#
+# For production (minimal runtime dependencies):
+#   pip install -r requirements-prod.txt
+#
+# Note: For CUDA support with PyTorch, use:
+#   pip install --upgrade --force-reinstall torch==2.0.1+cu117 --index-url https://download.pytorch.org/whl/cu117
+#
+# Or use the conda environment:
+#   conda env create -f environment.yml
 
-# dependency resolution for torch with cuda using pip
-# pip install --upgrade --force-reinstall torch==2.0.1+cu117 --index-url https://download.pytorch.org/whl/cu117
+# Keep core dependencies for backward compatibility
+-r requirements-prod.txt
+-r requirements-dev.txt

@@ -1,0 +1,18 @@
+# Production dependencies for MNIST inference server
+# Core ML and inference
+torch>=2.0.1
+torchvision>=0.15.2
+onnx>=1.13.1
+
+# FastAPI and server
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+
+# Utilities
+Pillow>=9.4.0
+click>=8.1.0
+
+# Logging and monitoring
+python-json-logger>=2.0.0
